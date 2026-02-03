@@ -1,0 +1,8 @@
+dep.*
+*.sublime-*
+__pycache__
+dump/
+local.env
+source_data/solutions/data/
+.DS_Store
+.env/
