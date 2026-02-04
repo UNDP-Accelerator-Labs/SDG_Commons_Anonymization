@@ -2,11 +2,11 @@ import urllib.request
 from pprint import pprint
 import json
 from os.path import join, exists, dirname
-from os import makedirs, getenv
+from os import makedirs, environ
 
 if __name__ == "__main__":
-  token = getenv("API_KEY")
-  platform = "solutions"
+  token = environ("API_KEY")
+  platform = environ("PLATFORM")
 
   contents = urllib.request.urlopen(f"https://{platform}.sdg-innovation-commons.org/apis/fetch/pads?output=json&token={token}&status=2&status=3&include_data=true&include_tags=true&include_metafields=true&include_locations=true&include_imgs=true").read()
   ## TO DO: UPDATE THIS ENDPOINT TO THE NEW SDG Commons URL

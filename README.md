@@ -13,7 +13,10 @@ Then activate the virtual environment by running:
 ```
 source {the_name_of_your_virtual_env}/bin/activate
 ```
-Finally, install all the requirements listed in the ```requirements.txt``` file.
+Finally, install all the requirements listed in the ```requirements.txt``` file by running:
+```
+pip install -r requirements.txt
+```
 
 ## Step 1: Pull the data
 

@@ -4,5 +4,7 @@ __pycache__
 dump/
 local.env
 source_data/solutions/data/
+source_data/learningplans/data/
 .DS_Store
 .env/
+pii_*_adversarial.json

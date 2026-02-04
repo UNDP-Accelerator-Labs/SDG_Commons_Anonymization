@@ -1,4 +1,4 @@
-from os import listdir
+from os import listdir, environ
 from os.path import join, dirname, isfile, exists
 import json
 from sys import path as syspath
@@ -72,6 +72,7 @@ def traverseStructure(data:dict,pii:list) -> dict:
   return sections
   
 if __name__ == "__main__":
+  platform = environ("PLATFORM")
   ## Establish DB connection
   conn = psqlTable("sdg_commons_master_202601")
   ## Create the redacted sections column if it does not exist, as well as a redacted flag columns
@@ -81,10 +82,10 @@ if __name__ == "__main__":
   conn.execute(f"UPDATE pads SET sections_redacted = sections")
   ## Get the data
   ## This should be up to date, since it is pulling from the prod API, not the DB
-  source_dir = join(dirname(__file__), "../source_data/solutions/data/")
+  source_dir = join(dirname(__file__), f"../source_data/{platform}/data/")
   data = getData(source_dir)
   ## Get the anonymzation information
-  piis = json.loads(open(join(dirname(__file__), "../anonymize/data/pii_adversarial.json")).read())
+  piis = json.loads(open(join(dirname(__file__), f"../anonymize/data/pii_{platform}_adversarial.json")).read())
   piis = [d for d in piis if len(d.get("pii",[])) > 0]
   piis_pids = [d.get("pid", None) for d in piis if d.get("pid", None) is not None]
   

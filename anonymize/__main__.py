@@ -1,4 +1,4 @@
-from os import listdir
+from os import listdir, environ
 from os.path import join, dirname, isfile, exists
 import json
 from sys import path as syspath
@@ -108,9 +108,10 @@ def getPIID(data,**kwargs):
       return ({ "pid": pid, "pii": None, "transcript": t, "reasoning": r }, conversation)
 
 if __name__ == "__main__":
-  source_dir = join(dirname(__file__), "../source_data/solutions/data/")
+  platform = environ("PLATFORM")
+  source_dir = join(dirname(__file__), f"../source_data/{platform}/data/")
   out_dir = join(dirname(__file__), "data")
-  file = join(out_dir, "pii_adversarial.json")
+  file = join(out_dir, f"pii_{platform}_adversarial.json")
   data = getData(source_dir)
   print(Fore.YELLOW + f"Total data length: {len(data)}" + Fore.WHITE)
 
@@ -174,6 +175,3 @@ if __name__ == "__main__":
       Close the array.
       """
       print(f"file created")
-
-
-
